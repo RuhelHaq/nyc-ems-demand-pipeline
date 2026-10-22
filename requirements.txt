@@ -1,0 +1,11 @@
+pandas
+pyarrow
+scikit-learn
+xgboost
+prophet
+mlflow
+pyyaml
+fastapi
+uvicorn
+pytest
+requests
