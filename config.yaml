@@ -1,11 +1,13 @@
 data:
   raw_data: data/raw
-  history_file: data/raw/history_hourly.parquet
-  api_url: "https://data.cityofnewyork.us/resource/XXXX-XXXX.json"
-  history_start: "2024-07-01"
-  history_end: "2025-04-30"
-  replay_months: ["2025-05", "2025-06", "2025-07", "2025-08",
-                  "2025-09", "2025-10", "2025-11", "2025-12"]
+  api_url: "https://data.cityofnewyork.us/resource/76xm-jjuj.json"
+  history_start: "2023-01"
+  history_end: "2024-12"
+  replay_start: "2025-01"
+  replay_end: "2026-09"
+
+cleaning:
+  drop_boroughs: ["UNKNOWN"]
 
 forecasts:
   sift_hours: 8
