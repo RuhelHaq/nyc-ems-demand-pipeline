@@ -1,5 +1,5 @@
 data:
-  raw_data: data/raw
+  raw_dir: data/raw
   api_url: "https://data.cityofnewyork.us/resource/76xm-jjuj.json"
   history_start: "2023-01"
   history_end: "2024-12"
