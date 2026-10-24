@@ -9,7 +9,7 @@ data:
 cleaning:
   drop_boroughs: ["UNKNOWN"]
 
-forecasts:
+forecast:
   sift_hours: 8
   boroughs: ["BRONX", "BROOKLYN", "MANHATTAN", "QUEENS", "RICHMOND / STATEN ISLAND"]
 
