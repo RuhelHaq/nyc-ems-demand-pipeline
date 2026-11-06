@@ -19,3 +19,4 @@ model:
 
 mlflow:
   experiment_name: ems-shift-demand
+  tracking_uri: sqlite:///mlflow.db
