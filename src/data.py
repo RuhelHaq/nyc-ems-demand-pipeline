@@ -16,6 +16,7 @@ def load_raw_month(month, config):
 def clean_month(df, month, config):
     """Fix types, build one timestamp, drop unwanted boroughs, fill missing hours with 0."""
     df = df.copy()
+    raw_calls = df["calls"].copy()
 
     # 1. Text -> numbers
     df["calls"] = df["calls"].astype(int)
@@ -39,6 +40,13 @@ def clean_month(df, month, config):
         .reindex(full_grid, fill_value=0)
         .reset_index()
     )
+
+    raw_total = int(pd.to_numeric(raw_calls, errors="coerce").sum())
+    clean_total = int(df["calls"].sum())
+    dropped = raw_total - clean_total
+    if raw_total and dropped / raw_total > 0.01:
+        raise ValueError(f"{month}: dropped {dropped} of {raw_total} calls (>1%) during cleaning")
+    
     return df.sort_values(["borough", "timestamp"]).reset_index(drop=True)
 
 
