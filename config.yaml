@@ -10,7 +10,7 @@ cleaning:
   drop_boroughs: ["UNKNOWN"]
 
 forecast:
-  sift_hours: 8
+  shift_hours: 8
   boroughs: ["BRONX", "BROOKLYN", "MANHATTAN", "QUEENS", "RICHMOND / STATEN ISLAND"]
 
 model:
