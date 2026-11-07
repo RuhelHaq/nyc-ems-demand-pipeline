@@ -8,4 +8,6 @@ pyyaml
 fastapi
 uvicorn
 pytest
-requestsmatplotlib
+requests
+matplotlib
+httpx
