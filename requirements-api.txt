@@ -1,0 +1,8 @@
+pandas
+pyarrow
+pyyaml
+requests
+xgboost
+mlflow
+fastapi
+uvicorn

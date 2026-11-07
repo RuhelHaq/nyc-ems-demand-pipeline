@@ -9,7 +9,7 @@ from xgboost import XGBRegressor
 
 from src.download import load_config
 from src.data import load_hourly
-from src.features import FEATURE_COLS, make_features
+from src.features import FEATURE_COLS, make_features, make_X
 
 logging.getLogger("cmdstanpy").disabled = True  # quiet Prophet's messages
 
@@ -20,13 +20,6 @@ def split_by_month(df, start_month, end_month):
     end = pd.Period(end_month, freq="M").end_time
     return df[(df["shift_start"] >= start) & (df["shift_start"] <= end)].copy()
 
-
-def make_X(df, config):
-    """Model inputs: our features plus one yes/no column per borough."""
-    X = df[FEATURE_COLS].copy()
-    for b in config["forecast"]["boroughs"]:
-        X["is_" + b] = (df["borough"] == b).astype(int)
-    return X
 
 
 def score(test, preds):

@@ -1,3 +1,4 @@
+import os
 import re
 from datetime import date, datetime, time
 from enum import Enum
@@ -10,16 +11,20 @@ from fastapi.responses import HTMLResponse
 
 from src.download import load_config
 from src.data import load_hourly
-from src.features import FEATURE_COLS, to_shifts, add_calendar_features, add_history_features
-from src.train import make_X
+from src.features import FEATURE_COLS, to_shifts, add_calendar_features, add_history_features, make_X
+
 
 # ---------- Load once, when the API starts ----------
 config = load_config()
 SHIFT_HOURS = config["forecast"]["shift_hours"]
 BOROUGHS = config["forecast"]["boroughs"]
 
-mlflow.set_tracking_uri(config["mlflow"]["tracking_uri"])
-MODEL_URI = f"models:/{config['mlflow']['registered_model']}@champion"
+MODEL_PATH = os.getenv("MODEL_PATH")       # set inside Docker
+if MODEL_PATH:
+    MODEL_URI = MODEL_PATH                  # load the exported model from a folder
+else:
+    mlflow.set_tracking_uri(config["mlflow"]["tracking_uri"])
+    MODEL_URI = f"models:/{config['mlflow']['registered_model']}@champion"
 model = mlflow.xgboost.load_model(MODEL_URI)
 
 hourly = load_hourly(config["data"]["history_start"], config["data"]["replay_end"], config)

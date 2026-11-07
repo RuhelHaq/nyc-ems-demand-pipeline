@@ -57,6 +57,14 @@ def make_features(hourly, config):
     return df.dropna(subset=FEATURE_COLS).reset_index(drop=True)
 
 
+def make_X(df, config):
+    """Model inputs: our features plus one yes/no column per borough."""
+    X = df[FEATURE_COLS].copy()
+    for b in config["forecast"]["boroughs"]:
+        X["is_" + b] = (df["borough"] == b).astype(int)
+    return X
+
+
 if __name__ == "__main__":
     config = load_config()
     hourly = load_hourly(config["data"]["history_start"], config["data"]["replay_end"], config)
