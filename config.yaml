@@ -21,3 +21,6 @@ mlflow:
   experiment_name: ems-shift-demand
   tracking_uri: sqlite:///mlflow.db
   registered_model: ems-xgboost
+
+replay:
+  drift_threshold: 0.10

@@ -6,4 +6,5 @@ __pycache__/
 data/
 mlruns/
 models/
-practice/mlflow.db
+practice/
+mlflow.db
